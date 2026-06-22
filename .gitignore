@@ -1,0 +1,6 @@
+.idea
+.code
+vendor
+.phpunit.result.cache
+tests/logs/*
+!tests/logs/.gitkeep
