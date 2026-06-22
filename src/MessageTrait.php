@@ -13,7 +13,7 @@ use Psr\Http\Message\StreamInterface;
  */
 trait MessageTrait
 {
-    protected const HEADER_NAME = '/^[!#$%&\'*+\-.^_`|~0-9A-Za-z]+$/';
+    protected const TOKEN = '/^[!#$%&\'*+\-.^_`|~0-9A-Za-z]+$/';
     protected const HEADER_VALUE = '/^[\x20\x09\x21-\x7E\x80-\xFF]*$/';
 
     protected string $protocolVersion = '1.1';
@@ -150,7 +150,7 @@ trait MessageTrait
 
     protected function assertHeaderName(string $name): void
     {
-        if (preg_match(self::HEADER_NAME, $name) !== 1) {
+        if (preg_match(self::TOKEN, $name) !== 1) {
             throw new InvalidArgumentException("Invalid header name: {$name}");
         }
     }

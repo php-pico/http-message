@@ -108,6 +108,11 @@ final class UriTest extends TestCase
         $this->assertSame($input, (string) new Uri($input));
     }
 
+    public function testEmptyAuthorityOmitsDoubleSlash(): void
+    {
+        $this->assertSame('file:/etc/hosts', (string) new Uri('file:///etc/hosts'));
+    }
+
     public static function roundTripProvider(): array
     {
         return [

@@ -33,12 +33,7 @@ final class ServerRequest implements ServerRequestInterface
         ?UriInterface $uri = null,
         protected array $serverParams = [],
     ) {
-        $this->method = $this->filterMethod($method);
-        $this->uri = $uri ?? new Uri();
-
-        if (!$this->hasHeader('Host')) {
-            $this->updateHostFromUri();
-        }
+        $this->initialize($method, $uri);
     }
 
     #[\Override]

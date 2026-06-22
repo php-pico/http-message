@@ -13,11 +13,6 @@ final class Request implements RequestInterface
 
     public function __construct(string $method = 'GET', ?UriInterface $uri = null)
     {
-        $this->method = $this->filterMethod($method);
-        $this->uri = $uri ?? new Uri();
-
-        if (!$this->hasHeader('Host')) {
-            $this->updateHostFromUri();
-        }
+        $this->initialize($method, $uri);
     }
 }

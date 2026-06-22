@@ -10,8 +10,8 @@ use RuntimeException;
 
 final class Stream implements StreamInterface
 {
-    protected const READABLE_MODE = '/r|\+/';
-    protected const WRITABLE_MODE = '/[waxc]|\+/';
+    protected const READABLE_MODE = '/[r+]/';
+    protected const WRITABLE_MODE = '/[waxc+]/';
 
     /** @var resource|null */
     protected $resource;

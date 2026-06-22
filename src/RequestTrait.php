@@ -15,11 +15,19 @@ trait RequestTrait
 {
     use MessageTrait;
 
-    protected const METHOD_TOKEN = '/^[!#$%&\'*+\-.^_`|~0-9A-Za-z]+$/';
-
     protected string $method = 'GET';
     protected ?string $requestTarget = null;
     protected UriInterface $uri;
+
+    protected function initialize(string $method, ?UriInterface $uri): void
+    {
+        $this->method = $this->filterMethod($method);
+        $this->uri = $uri ?? new Uri();
+
+        if (!$this->hasHeader('Host')) {
+            $this->updateHostFromUri();
+        }
+    }
 
     public function getRequestTarget(): string
     {
@@ -64,7 +72,7 @@ trait RequestTrait
 
     protected function filterMethod(string $method): string
     {
-        if (preg_match(self::METHOD_TOKEN, $method) !== 1) {
+        if (preg_match(self::TOKEN, $method) !== 1) {
             throw new InvalidArgumentException("Invalid HTTP method: {$method}");
         }
 
